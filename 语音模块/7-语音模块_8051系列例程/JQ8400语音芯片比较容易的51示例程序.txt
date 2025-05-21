@@ -1,0 +1,87 @@
+
+#include "reg52.h"
+#include "absacc.h"
+#include "intrins.h"
+
+#define uchar unsigned char
+#define uint unsigned int
+
+char cmd1[]={0xaa,0x02,0x00,0xaC};
+
+char cmd2[]={0xAA, 0x07, 0x02, 0x00, 0x04, 0xB7};
+
+void SERIAL_ROUTING() interrupt 4
+{
+//输入程序代码
+}
+
+void INIT_SERIAL()
+{
+	SCON = 0x40;
+	PCON &= 0x7F;
+	TH1 = 0xFD;
+	TL1 = 0xFD;
+	TMOD &= 0x0F;
+	TMOD |= 0x20;
+	TR1 = 1;
+	IP &= 0xEF;
+	IE |= 0x10;
+}
+
+void InitInterrupt()
+{
+	INIT_SERIAL();
+}
+void shuru(uchar dat)
+{
+	SBUF=dat;
+	while(!TI);
+	TI=0;
+}
+void send(uchar *P)
+{
+    while(*P!='\0')
+    {
+  	  	shuru(*P);
+	  	P++;
+    } 
+}
+void delay(uint t)
+{
+	uint k;
+	while(--t)
+	{
+		k=60000;
+		while(--k);
+	}
+}
+void sendcmd(uchar *p,uchar len)
+{
+    uchar i=0;
+	while(i<len)
+    {
+  	  	shuru(*(p+i));
+	  	i++;
+    } 
+}
+void main()
+{
+	uchar j;
+	InitInterrupt();
+	//输入程序代码
+	//sendcmd(cmd1,4);
+			j=1;
+	 while(j<你的音频数)
+	 {
+	 
+	 
+		sendcmd(cmd2,4);
+		shuru(j);
+		shuru(0xB3+j)	;
+		delay(6);
+		j++;
+	
+	}//放完所有的音频就结束
+	while(1);
+}
+

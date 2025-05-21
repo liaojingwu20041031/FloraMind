@@ -1,0 +1,10 @@
+duoji____xm\cjson.o: ..\Core\wc\cJSON.c
+duoji____xm\cjson.o: D:\stm32\STM32_byq\ARM\ARMCC\Bin\..\include\string.h
+duoji____xm\cjson.o: D:\stm32\STM32_byq\ARM\ARMCC\Bin\..\include\stdio.h
+duoji____xm\cjson.o: D:\stm32\STM32_byq\ARM\ARMCC\Bin\..\include\math.h
+duoji____xm\cjson.o: D:\stm32\STM32_byq\ARM\ARMCC\Bin\..\include\stdlib.h
+duoji____xm\cjson.o: D:\stm32\STM32_byq\ARM\ARMCC\Bin\..\include\limits.h
+duoji____xm\cjson.o: D:\stm32\STM32_byq\ARM\ARMCC\Bin\..\include\ctype.h
+duoji____xm\cjson.o: D:\stm32\STM32_byq\ARM\ARMCC\Bin\..\include\float.h
+duoji____xm\cjson.o: ..\Core\wc\cJSON.h
+duoji____xm\cjson.o: D:\stm32\STM32_byq\ARM\ARMCC\Bin\..\include\stddef.h
