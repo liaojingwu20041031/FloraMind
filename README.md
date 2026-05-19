@@ -10,6 +10,7 @@
 
 ![STM32](https://img.shields.io/badge/MCU-STM32F103ZET6-blue?style=for-the-badge&logo=stmicroelectronics)
 ![FreeRTOS](https://img.shields.io/badge/RTOS-FreeRTOS%20v10.0.1-green?style=for-the-badge)
+![xiaozhi-esp32](https://img.shields.io/badge/AI%20Voice-xiaozhi--esp32-orange?style=for-the-badge&logo=espressif)
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 
 <br>
@@ -29,6 +30,8 @@
 
 FloraMind 是一个基于 **STM32F103ZET6** 微控制器和 **FreeRTOS** 实时操作系统的智能植物养护系统。系统集成了多传感器环境监测、AI 语音交互、物联网远程控制和拟人化表情反馈四大核心能力，能够自动感知植物生长环境并通过智能算法实现自适应控制。
 
+AI 语音交互基于开源项目 [**xiaozhi-esp32**](https://github.com/78/xiaozhi-esp32) (ESP32-S3)，提供在线大模型对话能力；[**天问 ASRPRO**](http://www.ai-asr.com/) 负责离线语音唤醒和本地指令识别，两者协同实现完整的语音交互链路。
+
 <div align="center">
 <img src="实物图片.jpg" alt="FloraMind 实物图" width="600">
 </div>
@@ -42,7 +45,7 @@ FloraMind 是一个基于 **STM32F103ZET6** 微控制器和 **FreeRTOS** 实时�
 | **自适应阈值** | 温度阈值基于历史数据动态调整，光照/土壤湿度采用动态迟滞控制 |
 | **预测性灌溉** | 基于线性外推的土壤湿度趋势预测，防止水泵频繁启停 |
 | **拟人表情系统** | 15 种表情状态，基于环境数据的加权评分决策，3 秒防抖平滑过渡 |
-| **三端控制** | 本地自动控制 + AI 语音控制 + 阿里云 IoT 远程控制，带优先级仲裁 |
+| **三端控制** | 本地自动控制 + AI 语音控制 (xiaozhi-esp32 + 天问 ASRPRO) + 阿里云 IoT 远程控制，带优先级仲裁 |
 | **FreeRTOS 多任务** | 7 个任务、16 个消息队列、1 个互斥锁，任务间解耦通信 |
 
 ---
@@ -61,24 +64,32 @@ FloraMind 是一个基于 **STM32F103ZET6** 微控制器和 **FreeRTOS** 实时�
                          └────────┬────────┘
                                   │
 ┌──────────────┐       ┌─────────┴─────────┐       ┌──────────────┐
-│  TianWen AI  │       │  STM32F103ZET6    │       │  TJC Serial  │
-│ Voice Module │◄─────►│  + FreeRTOS       │◄─────►│  LCD Display │
+│  TianWen     │       │  STM32F103ZET6    │       │  TJC Serial  │
+│  ASRPRO      │◄─────►│  + FreeRTOS       │◄─────►│  LCD Display │
 │  (USART3)    │       │  7 Tasks          │       │  (USART1)    │
-└──────────────┘       │  16 Queues        │       └──────────────┘
-                       └──┬───┬───┬───┬───┘
-                          │   │   │   │
-              ┌───────────┘   │   │   └───────────┐
-              ▼               ▼   ▼               ▼
-      ┌──────────────┐ ┌──────────────┐  ┌──────────────┐
-      │   Sensors    │ │  Actuators   │  │   Display    │
-      ├──────────────┤ ├──────────────┤  ├──────────────┤
-      │ DHT11        │ │ Relay x3     │  │ OLED 128x64  │
-      │ SGP30        │ │  - Grow Light│  │ (I2C1)       │
-      │ ADC x2       │ │  - Water Pump│  └──────────────┘
-      │  (Soil+Light)│ │  - Fan       │
-      │ PIR (PE0)    │ │ Servo (UART5)│
-      │ Vibration    │ └──────────────┘
-      └──────────────┘
+│  离线唤醒    │       │  16 Queues        │       └──────────────┘
+└──────┬───────┘       └──┬───┬───┬───┬───┘
+       │                  │   │   │   │
+       │  WiFi (STA)      │   │   │   │
+       └─────────┐        │   │   │   │
+                 ▼        │   │   │   │
+      ┌──────────────┐    │   │   │   │
+      │  xiaozhi-    │    │   │   │   │
+      │  esp32 (S3)  │    │   │   │   │
+      │  在线AI对话  │    │   │   │   │
+      └──────────────┘    │   │   │   │
+                 ┌────────┘   │   │   └───────────┐
+                 ▼            ▼   ▼               ▼
+         ┌──────────────┐ ┌──────────────┐  ┌──────────────┐
+         │   Sensors    │ │  Actuators   │  │   Display    │
+         ├──────────────┤ ├──────────────┤  ├──────────────┤
+         │ DHT11        │ │ Relay x3     │  │ OLED 128x64  │
+         │ SGP30        │ │  - Grow Light│  │ (I2C1)       │
+         │ ADC x2       │ │  - Water Pump│  └──────────────┘
+         │  (Soil+Light)│ │  - Fan       │
+         │ PIR (PE0)    │ │ Servo (UART5)│
+         │ Vibration    │ └──────────────┘
+         └──────────────┘
 ```
 
 ### 数据流
@@ -92,10 +103,10 @@ Sensors ──► Task 1 (Read + Kalman Filter) ──► Queues ──► Task 
 ESP8266 UART RX ──► Ring Buffer ──► Task 5 (JSON Parse) ──► Queues (WiFi Control)
                                                               │
 TianWen UART RX ──► Task 4 (Command Decode) ──► Queues (Voice Control)
-                                                              │
-                                                              ▼
-                                                     Task 6 (Relay Control)
-                                                     ──► Relay GPIO Output
+       │                                                        │
+       │ 唤醒词检测                                              ▼
+       └──► 0x07 ──► xiaozhi-esp32 ──► WiFi ──► 大模型     Task 6 (Relay Control)
+                     (在线AI对话)    (ASR→LLM→TTS)         ──► Relay GPIO Output
 ```
 
 ---
@@ -123,8 +134,9 @@ TianWen UART RX ──► Task 4 (Command Decode) ──► Queues (Voice Contro
 
 | 模块 | 型号 | 接口 | 波特率 | 说明 |
 |------|------|------|--------|------|
-| WiFi | ESP8266 | USART2 (PD5/PD6) | 115200 | AT 指令集, MQTT |
-| AI 语音 | 天问 ASRPRO | USART3 (PD8/PD9) | 9600 | 离线语音识别 |
+| WiFi | ESP8266 | USART2 (PD5/PD6) | 115200 | AT 指令集, MQTT, 连接阿里云 IoT |
+| AI 语音 (在线) | xiaozhi-esp32 (ESP32-S3) | WiFi (STA) | - | [开源项目](https://github.com/78/xiaozhi-esp32), 大模型对话, 语音合成 |
+| 语音唤醒 (离线) | 天问 ASRPRO | USART3 (PD8/PD9) | 9600 | 离线语音唤醒 + 本地指令识别, 唤醒后联动 xiaozhi 进入 AI 对话 |
 
 ### 显示模块
 
@@ -343,6 +355,8 @@ FloraMind/
 ├── README.md
 ├── LICENSE
 └── .gitignore
+
+> **注:** AI 语音交互部分基于 [xiaozhi-esp32](https://github.com/78/xiaozhi-esp32) (ESP32-S3)，代码独立维护在该项目仓库中。
 ```
 
 ---
@@ -352,7 +366,8 @@ FloraMind/
 | 模块 | 协议 | 说明 |
 |------|------|------|
 | ESP8266 | MQTT over AT | 阿里云 IoT, JSON 数据上报 + 远程控制 |
-| 天问语音 | 自定义 UART 帧 | `FF {cmd} 00` 下行, `{标识+数据}` 上行 |
+| xiaozhi-esp32 | WiFi (STA) | 开源 AI 语音, 大模型对话 + TTS 语音合成 |
+| 天问 ASRPRO | 自定义 UART 帧 | 离线唤醒 + `FF {cmd} 00` 本地指令 |
 | TJC 串口屏 | HMI 指令 | `{attr} {value} FF FF FF` |
 | Feetech 舵机 | 总线协议 | `55 {len} {cmd} {params...}` |
 
@@ -378,6 +393,8 @@ FloraMind/
 
 **FloraMind** is an intelligent plant care system built on the STM32F103ZET6 microcontroller running FreeRTOS v10.0.1. It integrates multi-sensor environmental monitoring, AI voice interaction, IoT remote control, and anthropomorphic expression feedback to automatically sense plant growing conditions and implement adaptive control through intelligent algorithms.
 
+AI voice interaction is powered by [**xiaozhi-esp32**](https://github.com/78/xiaozhi-esp32) (ESP32-S3) for online LLM-based conversation, while [**TianWen ASRPRO**](http://www.ai-asr.com/) handles offline voice wake-up and local command recognition.
+
 ### Key Features
 
 - **Multi-Sensor Fusion** -- DHT11 (temp/humidity), SGP30 (CO2/TVOC), soil moisture, light intensity, PIR motion, and vibration sensors
@@ -392,7 +409,7 @@ FloraMind/
 
 - **MCU**: STM32F103ZET6 (72MHz Cortex-M3, 512KB Flash, 64KB RAM)
 - **Sensors**: DHT11, SGP30, analog soil moisture & light, PIR, vibration
-- **Communication**: ESP8266 WiFi (MQTT), TianWen AI voice module
+- **Communication**: ESP8266 WiFi (MQTT), xiaozhi-esp32 (online AI voice), TianWen ASRPRO (offline wake-up)
 - **Display**: TJC 4.3" serial touchscreen, 0.96" OLED
 - **Actuators**: 3-channel relay (grow light, water pump, fan), Feetech serial servos
 
