@@ -52,6 +52,7 @@
 /* USER CODE BEGIN PTD */
 uint8_t wifi_string[256];
 uint8_t tw_fs[10];
+uint8_t ly_js[4];//À¶ÑÀÄ£¿é½ÓÊÜ»º³åÇø
 char* wifi_string2 = NULL; 
 uint8_t tw_num[4];
 uint16_t wd;//ÎÂ¶È
@@ -61,6 +62,7 @@ uint8_t sb_num=0,bg_num=0,fs_num=0,sb_num2=0,bg_num2=0,fs_num2=0;//Ë®±Ã£¬²¹¹âµÆ£
 uint8_t sb_num_yy=0,bg_num_yy=0,fs_num_yy=0,sb_num_yy2=0,bg_num_yy2=0,fs_num_yy2=0,yy_num2=0;//Ô¶¶Ë¡¢ÓïÒô¿ØÖÆ±êÖ¾Î»
 uint8_t dsj_tim3=0,dsq_fs=0;//¼ÆÊ±±ê×¼Î»£¨1Ãëµ¥Î»£©
 uint8_t zt_fs=0XFF,zt_fs2=0XFF;//Ö²Îï×´Ì¬Âë
+uint8_t ly_num=0x00;//ÅĞ¶ÏÀ¶ÑÀĞÅºÅ±êÖ¾Î»0x00:Õı³£ÎŞÊÂ£¬ºóÃæÔÙ¶¨¡£¡£¡£¡££©
 uint8_t tw_bz=0;
 KalmanFilter wd_kal,sd_kal,tr_sd_kal,CO2_kal,gq_kal;//¿¨¶ûÂüÂË²¨²ÎÊı
 float wd_2,sd_2,tr_sd_2,gq_2;//¿¨¶ûÂüÂË²¨ºóµÄÖµ
@@ -75,7 +77,8 @@ uint8_t yy_num=0; //AIÓïÒôÁÄÌìÄ£Ê½±êÖ¾Î»
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 void extract_switch_value(const char *json_str, const char *field,uint8_t*num);
-void tw_cl(char*tw);//ÌìÎÊ´®¿Ú´¦Àí
+void tw_cl(char *tw);//ÌìÎÊ´®¿Ú´¦Àí
+void ly_cl(uint8_t *ly);//À¶ÑÀ´®¿Ú´¦Àí
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -110,6 +113,12 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 				
 	    tw_cl((char*)tw_num);//ĞÅÏ¢´¦Àí
 			HAL_UART_Receive_IT(&huart3, tw_num, 3);//³õÊ¼»¯½ÓÊÜ
+		}
+		if(huart->Instance == UART5)//½ÓÊÜÀ¶ÑÀÄ£¿éµÄĞÅÏ¢
+		{
+			
+      ly_cl(ly_js);//ĞÅÏ¢´¦Àí
+      HAL_UART_Receive_IT(&huart5, ly_js, 4);
 		}
 }
 
@@ -148,7 +157,7 @@ void check_and_reboot(void);//ÖØÆôº¯Êı
 void cgq_sz(void);//´«¸ĞÆ÷¶ÁÊıÖµ
 void OLED_UI(void);//UI½çÃæº¯Êı
 void wifi_cl(char*json_str);
-void ck_fs(uint8_t num,uint8_t num2);//·¢ËÍ´®¿ÚÊı¾İ
+void ck_fs(uint8_t num,uint8_t num2,uint8_t ly_num3);//·¢ËÍ´®¿ÚÊı¾İ
 bool zd_pos(void);//Õğ¶¯¸ĞÓ¦Ä£¿é
 void tw_kz(uint8_t tw);//ÌìÎÊ¿ØÖÆº¯Êı
 void tw_cl2(void);//ÌìÎÊÄ£¿é×Ö·û´®·¢ËÍ´¦Àí
@@ -201,6 +210,7 @@ int main(void)
   MX_USART3_UART_Init();
   MX_TIM3_Init();
   MX_RTC_Init();
+  MX_UART5_Init();
   /* USER CODE BEGIN 2 */
    HAL_TIM_Base_Start_IT(&htim3);//´ò¿ª¶¨Ê±Æ÷3ÖĞ¶Ï
 	 
@@ -220,7 +230,10 @@ int main(void)
 	 
 	 HAL_UART_Init(&huart3);  //ÌìÎÊÄ£¿é
 	 HAL_UART_Receive_IT(&huart3, tw_num, 3);//³õÊ¼»¯½ÓÊÜ
-	 
+
+	 HAL_UART_Init(&huart5);  //À¶ÑÀÄ£¿é
+	 HAL_UART_Receive_IT(&huart5, ly_js, 4);//³õÊ¼»¯½ÓÊÜ
+   
 	 HAL_UART_Init(&huart1);  
 	
 	 ESP8266_Init();//ÈÈµãÁ¬½Ó
@@ -240,7 +253,7 @@ int main(void)
 //		time++;
 	  cgq_sz();//´«¸ĞÆ÷¶ÁÈ¡º¯Êı(´¦Àí·ÖÎö)	
 		
-		ck_fs(dsq_fs,zt_fs);//·¢ËÍ´®¿ÚÏûÏ¢£¨ESP8266ºÍÌìÎÊÄ£¿é£©
+		ck_fs(dsq_fs,zt_fs,ly_num);//·¢ËÍ´®¿ÚÏûÏ¢£¨ESP8266ºÍÌìÎÊÄ£¿é£©
 		
 		tw_kz(tw_bz);//ÌìÎÊÄ£¿é¿ØÖÆ
 		
@@ -720,25 +733,81 @@ void wifi_cl(char*json_str)
 	
 }
 /**
+ * @description: À¶ÑÀÄ£¿é×Ö·û´®½ÓÊÜ´¦Àí
+ */
+void ly_cl(uint8_t*ly)
+{
+    // ¼ì²éÖ¡Í·ºÍÖ¡Î²ÊÇ·ñ·ûºÏÒªÇó
+    if ((uint8_t)ly[0] == 0xFF && (uint8_t)ly[3] == 0x00)
+    {
+         switch ((uint8_t)ly[1])
+         {
+         case 0x00:
+          { 
+            if((uint8_t)ly[2]==0x00)
+            {
+              ly_num=1;//Å¹´ò
+            }
+            break;
+          }
+         case 0x01:
+          {
+            if((uint8_t)ly[2]==0x00)
+            {
+              ly_num=2;//¾ÀÕı×ø×Ë
+            }
+            break;
+          }
+         case 0x02:
+          {
+            if((uint8_t)ly[2]==0x00)
+            {
+              ly_num=3;//¼ì²âÊÇ·ñÈÏÕæĞ´×÷Òµ
+            }
+            break;
+          }
+         case 0x03:
+          {
+            if((uint8_t)ly[2]==0x00)
+            {
+              ly_num=4;//ĞİÏ¢
+            }
+            break;
+          }
+         case 0x04:
+          {
+            if((uint8_t)ly[2]==0x00)//ÊÖÊÆÊ¶±ğ
+            {
+              ly_num=5;//
+            }
+          }
+         }
+    }
+}
+
+
+/**
  * @description: ·¢ËÍ´®¿ÚÏûÏ¢(ºËĞÄÄ£¿é)
  * @param num:¶¨Ê±Æ÷¼ÆÊıÆ÷±êÖ¾Î»£¨Ò²ÊÇÖ²Îï×´Ì¬±êÖ¾Î»£©
  * @param num2:Ö²Îï×´Ì¬µÄzhuangtaiÂë
+ * @param ly_num3:À¶ÑÀÄ£¿é×´Ì¬Âë
  */
-void ck_fs(uint8_t num,uint8_t num2)
+void ck_fs(uint8_t num,uint8_t num2,uint8_t ly_num3)
 {
     if(num==1)//Ïò°¢ÀïÔÆ·¢ËÍ¼ì²âÊı¾İ
 		{
 			ESP8266_fs_Data((float)(wd >> 8) + (float)(wd & 0xFF) / 256.0f,tr_sd,(float)(sd >> 8) + (float)(sd & 0xFF) / 256.0f,CO2,gq);
 		  dsq_fs=0;
 		}
-		else if(num==2)//ÏòÌìÎÊÄ£¿é·¢ËÍ¼ì²âÊı¾İ
+		else if(num==2)//ÏòÌìÎÊÄ£¿é·¢ËÍ¼ì²âÄ£¿éÊı¾İ
 		{
 		  tw_cl2();
 			dsq_fs=0;
 		}
+
 		if(num2!=zt_fs2)
 		{
-			zt_fs2=num2;//ÅĞ¶ÏÃüÁîÓĞ·ñ¸Ä±ä
+			    zt_fs2=num2;//ÅĞ¶ÏÃüÁîÓĞ·ñ¸Ä±ä
 			
 		      tw_fs[0]=0x00;
 			    tw_fs[1]=0x00;
@@ -752,6 +821,22 @@ void ck_fs(uint8_t num,uint8_t num2)
 					tw_fs[9]=num2;
 					HAL_UART_Transmit_IT(&huart3, tw_fs, 10);	  
 		}
+    else if(ly_num3!=0)
+    {
+        ly_num3=0;// ÖØÖÃ×´Ì¬
+
+        tw_fs[0]=0x00;
+        tw_fs[1]=0x00;
+        tw_fs[2]=0x00;
+        tw_fs[3]=0x00;
+        tw_fs[4]=0x00;
+        tw_fs[5]=0x00;
+        tw_fs[6]=0x00;
+        tw_fs[7]=0x00;
+        tw_fs[8]=0xF9;
+        tw_fs[9]=ly_num3;
+        HAL_UART_Transmit_IT(&huart3, tw_fs, 10);//·¢ËÍÀ¶ÑÀÄ£¿é×´Ì¬
+    }
 }
 
 /**

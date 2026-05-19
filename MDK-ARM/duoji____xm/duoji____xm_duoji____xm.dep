@@ -1,5 +1,5 @@
 Dependencies for Project 'duoji____xm', Target 'duoji____xm': (DO NOT MODIFY !)
-F (startup_stm32f103xe.s)(0x6809F85C)(--cpu Cortex-M3 -g --apcs=interwork -I.\RTE\_duoji____xm-ID:\stm32\STM32_byq\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\stm32\STM32_byq\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include--pd "__UVISION_VERSION SETA 524" --pd "_RTE_ SETA 1" --pd "STM32F10X_HD SETA 1"--list startup_stm32f103xe.lst --xref -o duoji____xm\startup_stm32f103xe.o --depend duoji____xm\startup_stm32f103xe.d)
+F (startup_stm32f103xe.s)(0x68402971)(--cpu Cortex-M3 -g --apcs=interwork -I.\RTE\_duoji____xm-ID:\stm32\STM32_byq\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\stm32\STM32_byq\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include--pd "__UVISION_VERSION SETA 524" --pd "_RTE_ SETA 1" --pd "STM32F10X_HD SETA 1"--list startup_stm32f103xe.lst --xref -o duoji____xm\startup_stm32f103xe.o --depend duoji____xm\startup_stm32f103xe.d)
 F (..\Core\wc\bool.h)(0x67165D8A)()
 F (..\Core\wc\oled.c)(0x677E8DE7)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../Core -I ../Core/wc-I.\RTE\_duoji____xm-ID:\stm32\STM32_byq\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\stm32\STM32_byq\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o duoji____xm\oled.o --omf_browse duoji____xm\oled.crf --depend duoji____xm\oled.d)
 I (..\Core\wc\oled.h)(0x6707D1F3)
@@ -76,14 +76,14 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x66EC277F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x66EC277F)
 I (..\Core\wc\bool.h)(0x67165D8A)
 I (D:\stm32\STM32_byq\ARM\ARMCC\include\stdio.h)(0x588B8344)
-I (../Core/Inc/usart.h)(0x67EF7A51)
+I (../Core/Inc/usart.h)(0x6840296F)
 I (../Core/Inc/main.h)(0x68143658)
 I (D:\stm32\STM32_byq\ARM\ARMCC\include\stdarg.h)(0x588B8344)
 F (..\Core\wc\wifi.h)(0x67F217BF)()
 F (..\Core\wc\tjc_usart_hmi.c)(0x6803A5D0)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../Core -I ../Core/wc-I.\RTE\_duoji____xm-ID:\stm32\STM32_byq\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\stm32\STM32_byq\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o duoji____xm\tjc_usart_hmi.o --omf_browse duoji____xm\tjc_usart_hmi.crf --depend duoji____xm\tjc_usart_hmi.d)
 I (..\Core\wc\tjc_usart_hmi.h)(0x6803A57A)
 I (D:\stm32\STM32_byq\ARM\ARMCC\include\stdio.h)(0x588B8344)
-I (../Core/Inc/usart.h)(0x67EF7A51)
+I (../Core/Inc/usart.h)(0x6840296F)
 I (../Core/Inc/main.h)(0x68143658)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x66EC277F)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x6809E1CD)
@@ -308,7 +308,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x66EC277F)
 I (../Core/wc/bool.h)(0x67165D8A)
 I (D:\stm32\STM32_byq\ARM\ARMCC\include\stdio.h)(0x588B8344)
 F (..\Core\wc\Kal_lb.h)(0x6808F50A)()
-F (../Core/Src/main.c)(0x6816CF7A)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../Core -I ../Core/wc-I.\RTE\_duoji____xm-ID:\stm32\STM32_byq\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\stm32\STM32_byq\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o duoji____xm\main.o --omf_browse duoji____xm\main.crf --depend duoji____xm\main.d)
+F (../Core/Src/main.c)(0x684031EB)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../Core -I ../Core/wc-I.\RTE\_duoji____xm-ID:\stm32\STM32_byq\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\stm32\STM32_byq\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o duoji____xm\main.o --omf_browse duoji____xm\main.crf --depend duoji____xm\main.d)
 I (../Core/Inc/main.h)(0x68143658)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x66EC277F)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x6809E1CD)
@@ -347,7 +347,7 @@ I (../Core/Inc/dma.h)(0x67EBE57B)
 I (../Core/Inc/i2c.h)(0x67ECD417)
 I (../Core/Inc/rtc.h)(0x6809E1CD)
 I (../Core/Inc/tim.h)(0x67F1335B)
-I (../Core/Inc/usart.h)(0x67EF7A51)
+I (../Core/Inc/usart.h)(0x6840296F)
 I (../Core/Inc/gpio.h)(0x67583CC2)
 I (../Core/wc/oled.h)(0x6707D1F3)
 I (../Core/wc/oledfont.h)(0x67039BCE)
@@ -574,8 +574,8 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc_ex.h)(0x66EC277F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h)(0x66EC277F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x66EC277F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x66EC277F)
-F (../Core/Src/usart.c)(0x67EF830F)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../Core -I ../Core/wc-I.\RTE\_duoji____xm-ID:\stm32\STM32_byq\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\stm32\STM32_byq\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o duoji____xm\usart.o --omf_browse duoji____xm\usart.crf --depend duoji____xm\usart.d)
-I (../Core/Inc/usart.h)(0x67EF7A51)
+F (../Core/Src/usart.c)(0x6840296F)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../Core -I ../Core/wc-I.\RTE\_duoji____xm-ID:\stm32\STM32_byq\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\stm32\STM32_byq\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o duoji____xm\usart.o --omf_browse duoji____xm\usart.crf --depend duoji____xm\usart.d)
+I (../Core/Inc/usart.h)(0x6840296F)
 I (../Core/Inc/main.h)(0x68143658)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x66EC277F)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x6809E1CD)
@@ -609,7 +609,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc_ex.h)(0x66EC277F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h)(0x66EC277F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x66EC277F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x66EC277F)
-F (../Core/Src/stm32f1xx_it.c)(0x6809E1CD)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../Core -I ../Core/wc-I.\RTE\_duoji____xm-ID:\stm32\STM32_byq\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\stm32\STM32_byq\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o duoji____xm\stm32f1xx_it.o --omf_browse duoji____xm\stm32f1xx_it.crf --depend duoji____xm\stm32f1xx_it.d)
+F (../Core/Src/stm32f1xx_it.c)(0x6840296F)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../Core -I ../Core/wc-I.\RTE\_duoji____xm-ID:\stm32\STM32_byq\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\stm32\STM32_byq\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o duoji____xm\stm32f1xx_it.o --omf_browse duoji____xm\stm32f1xx_it.crf --depend duoji____xm\stm32f1xx_it.d)
 I (../Core/Inc/main.h)(0x68143658)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x66EC277F)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x6809E1CD)
@@ -643,7 +643,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc_ex.h)(0x66EC277F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h)(0x66EC277F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x66EC277F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x66EC277F)
-I (../Core/Inc/stm32f1xx_it.h)(0x6809E1CD)
+I (../Core/Inc/stm32f1xx_it.h)(0x6840296F)
 F (../Core/Src/stm32f1xx_hal_msp.c)(0x67E8AE28)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../Core -I ../Core/wc-I.\RTE\_duoji____xm-ID:\stm32\STM32_byq\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\stm32\STM32_byq\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o duoji____xm\stm32f1xx_hal_msp.o --omf_browse duoji____xm\stm32f1xx_hal_msp.crf --depend duoji____xm\stm32f1xx_hal_msp.d)
 I (../Core/Inc/main.h)(0x68143658)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x66EC277F)
