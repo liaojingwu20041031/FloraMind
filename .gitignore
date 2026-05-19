@@ -4,6 +4,9 @@ MDK-ARM/DebugConfig/
 MDK-ARM/RTE/
 MDK-ARM/Listings/
 MDK-ARM/Objects/
+MDK-ARM/.cmsis/
+MDK-ARM/.eide/
+MDK-ARM/.vscode/
 *.o
 *.d
 *.crf
@@ -52,8 +55,10 @@ Desktop.ini
 .DS_Store
 
 # === Nested Git Repos / External Modules ===
--/
+"-  -/"
 天问_绿植_pos1/
+语音模块/
+MDK-ARM/.eide/
 
 # === Claude Code ===
 .claude/

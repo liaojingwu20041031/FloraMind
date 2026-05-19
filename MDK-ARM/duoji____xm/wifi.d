@@ -37,4 +37,14 @@ duoji____xm\wifi.o: ..\Core\wc\bool.h
 duoji____xm\wifi.o: D:\stm32\STM32_byq\ARM\ARMCC\Bin\..\include\stdio.h
 duoji____xm\wifi.o: ../Core/Inc/usart.h
 duoji____xm\wifi.o: ../Core/Inc/main.h
+duoji____xm\wifi.o: D:\stm32\STM32_byq\ARM\ARMCC\Bin\..\include\string.h
+duoji____xm\wifi.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h
+duoji____xm\wifi.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h
+duoji____xm\wifi.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+duoji____xm\wifi.o: ../Core/Inc/FreeRTOSConfig.h
+duoji____xm\wifi.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+duoji____xm\wifi.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+duoji____xm\wifi.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+duoji____xm\wifi.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3/portmacro.h
+duoji____xm\wifi.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
 duoji____xm\wifi.o: D:\stm32\STM32_byq\ARM\ARMCC\Bin\..\include\stdarg.h

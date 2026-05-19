@@ -7,7 +7,7 @@
 #include "bool.h"
 #include <stdio.h>
 #include "usart.h"
-
+#include "string.h"
 
 #define wifi_num "xxfq1"             //wifiÃû³Æ
 #define wifi_key "123456789"         //wifiÃÜÂë

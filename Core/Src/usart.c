@@ -163,18 +163,18 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
     PC12     ------> UART5_TX
     PD2     ------> UART5_RX
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_12;
+    GPIO_InitStruct.Pin = ly_TX_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-    HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+    HAL_GPIO_Init(ly_TX_GPIO_Port, &GPIO_InitStruct);
 
-    GPIO_InitStruct.Pin = GPIO_PIN_2;
+    GPIO_InitStruct.Pin = ly_RX_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+    HAL_GPIO_Init(ly_RX_GPIO_Port, &GPIO_InitStruct);
 
     /* UART5 interrupt Init */
-    HAL_NVIC_SetPriority(UART5_IRQn, 0, 0);
+    HAL_NVIC_SetPriority(UART5_IRQn, 5, 0);
     HAL_NVIC_EnableIRQ(UART5_IRQn);
   /* USER CODE BEGIN UART5_MspInit 1 */
 
@@ -204,7 +204,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
     HAL_GPIO_Init(xsp_RX_GPIO_Port, &GPIO_InitStruct);
 
     /* USART1 interrupt Init */
-    HAL_NVIC_SetPriority(USART1_IRQn, 1, 0);
+    HAL_NVIC_SetPriority(USART1_IRQn, 5, 0);
     HAL_NVIC_EnableIRQ(USART1_IRQn);
   /* USER CODE BEGIN USART1_MspInit 1 */
 
@@ -236,7 +236,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
     __HAL_AFIO_REMAP_USART2_ENABLE();
 
     /* USART2 interrupt Init */
-    HAL_NVIC_SetPriority(USART2_IRQn, 0, 0);
+    HAL_NVIC_SetPriority(USART2_IRQn, 5, 0);
     HAL_NVIC_EnableIRQ(USART2_IRQn);
   /* USER CODE BEGIN USART2_MspInit 1 */
 
@@ -268,7 +268,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
     __HAL_AFIO_REMAP_USART3_ENABLE();
 
     /* USART3 interrupt Init */
-    HAL_NVIC_SetPriority(USART3_IRQn, 1, 0);
+    HAL_NVIC_SetPriority(USART3_IRQn, 5, 0);
     HAL_NVIC_EnableIRQ(USART3_IRQn);
   /* USER CODE BEGIN USART3_MspInit 1 */
 
@@ -291,9 +291,9 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
     PC12     ------> UART5_TX
     PD2     ------> UART5_RX
     */
-    HAL_GPIO_DeInit(GPIOC, GPIO_PIN_12);
+    HAL_GPIO_DeInit(ly_TX_GPIO_Port, ly_TX_Pin);
 
-    HAL_GPIO_DeInit(GPIOD, GPIO_PIN_2);
+    HAL_GPIO_DeInit(ly_RX_GPIO_Port, ly_RX_Pin);
 
     /* UART5 interrupt Deinit */
     HAL_NVIC_DisableIRQ(UART5_IRQn);

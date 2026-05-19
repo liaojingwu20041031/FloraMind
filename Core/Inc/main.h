@@ -31,13 +31,13 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-//头文件
+//头锟侥硷拷
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
-//全局变量
-extern uint8_t sb_num_yy,bg_num_yy,fs_num_yy,sb_num_yy2,bg_num_yy2,fs_num_yy2,yy_num2;
+//全锟街憋拷锟斤拷
+
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/
@@ -76,10 +76,14 @@ void Error_Handler(void);
 #define xsp_TX_GPIO_Port GPIOA
 #define xsp_RX_Pin GPIO_PIN_10
 #define xsp_RX_GPIO_Port GPIOA
+#define ly_TX_Pin GPIO_PIN_12
+#define ly_TX_GPIO_Port GPIOC
 #define LED_GPIO_Pin GPIO_PIN_0
 #define LED_GPIO_GPIO_Port GPIOD
 #define csj_GPIO_Pin GPIO_PIN_1
 #define csj_GPIO_GPIO_Port GPIOD
+#define ly_RX_Pin GPIO_PIN_2
+#define ly_RX_GPIO_Port GPIOD
 #define fs_GPIO_Pin GPIO_PIN_3
 #define fs_GPIO_GPIO_Port GPIOD
 #define wifi_TX_Pin GPIO_PIN_5

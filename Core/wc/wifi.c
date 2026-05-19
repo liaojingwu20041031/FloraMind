@@ -1,7 +1,9 @@
 #include "wifi.h"
+#include "cmsis_os.h"
 #include <stdarg.h>
 
 #define UART_TX_BUFFER_SIZE 512
+#define HAL_Delay_MAX 2000 // 最大延迟2S
 static uint8_t uart_tx_buffer[UART_TX_BUFFER_SIZE];
 
 void HAL_UART_Transmit_IT_printf( const char *format, ...)
@@ -13,26 +15,28 @@ void HAL_UART_Transmit_IT_printf( const char *format, ...)
 
     if (len > 0)
     {
-        HAL_UART_Transmit_IT(&huart2, uart_tx_buffer, len);
+        HAL_UART_Transmit(&huart2, uart_tx_buffer, len, HAL_Delay_MAX);
     }
 }
 
-void ESP8266_Init()
+void ESP8266_Init(void)
 {
-    HAL_UART_Transmit_IT_printf("AT+CWJAP=\"%s\",\"%s\"\r\n", wifi_num, wifi_key);
-	  HAL_Delay(200);
-    HAL_UART_Transmit_IT_printf("AT+CIPMODE=1\r\n"); // 开启透传模式
-	  HAL_Delay(200);
+
+      HAL_UART_Transmit_IT_printf("AT+CWJAP=\"%s\",\"%s\"\r\n", wifi_num, wifi_key);
+	  osDelay(200);
+      HAL_UART_Transmit_IT_printf("AT+CIPMODE=1\r\n"); // 开启透传模式
+	  osDelay(200);
 	  HAL_UART_Transmit_IT_printf("AT+CIPSNTPCFG=1,8,\"ntp1.aliyun.com\"\r\n");		//第三步
-	  HAL_Delay(4000);					//延迟
-	  HAL_UART_Transmit_IT_printf("AT+MQTTUSERCFG=0,1,\"NULL\",\"ESP8266&k1oaeW0E3IM\",\"6eb7724829702a8673e7019dc54476032874f321d3f34e43e15fec5203971a60\",0,0,\"\"\r\n");		//第五步
-	  HAL_Delay(4000);					//延迟			
-	  HAL_UART_Transmit_IT_printf("AT+MQTTCLIENTID=0,\"k1oaeW0E3IM.ESP8266|securemode=2\\,signmethod=hmacsha256\\,timestamp=1743827052139|\"\r\n");		//第六步
-	  HAL_Delay(4000);					//延迟	
+	  osDelay(3000);					//延迟
+	  HAL_UART_Transmit_IT_printf("AT+MQTTUSERCFG=0,1,\"NULL\",\"ESP8266&k1oaeW0E3IM\",");		
+      HAL_UART_Transmit_IT_printf("\"f8a3450dd1fb77a865bfeef5bca3572dc6ffbde7cfeca5531fda8aa78ee20b72\",0,0,\"\"\r\n");//第五步(因为指令过长，分两次发送)
+	  osDelay(3000);					//延迟			
+	  HAL_UART_Transmit_IT_printf("AT+MQTTCLIENTID=0,\"k1oaeW0E3IM.ESP8266|securemode=2\\,signmethod=hmacsha256\\,timestamp=1757828500940|\"\r\n");		//第六步
+	  osDelay(3000);					//延迟	
 	  HAL_UART_Transmit_IT_printf("AT+MQTTCONN=0,\"iot-06z00c2ical049c.mqtt.iothub.aliyuncs.com\",1883,1\r\n");		//第七步
-	  HAL_Delay(4000);	
-	  HAL_UART_Transmit_IT_printf("AT+MQTTSUB=0,\"/sys/k1oaeW0E3IM/ESP8266/thing/service/property/set\",1\r\n");		//订阅指令
-	  HAL_Delay(2000);
+	  osDelay(3000);	
+	  HAL_UART_Transmit_IT_printf("AT+MQTTSUB=0,\"/sys/k1oaeW0E3IM/ESP8266/thing/service/property/set\",0\r\n");//订阅指令(后面的参数0表示QoS等级为0)
+	  osDelay(1000);
 }
 
 

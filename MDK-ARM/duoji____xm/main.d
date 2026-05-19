@@ -33,6 +33,15 @@ duoji____xm\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc_ex.h
 duoji____xm\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
 duoji____xm\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
 duoji____xm\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
+duoji____xm\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h
+duoji____xm\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h
+duoji____xm\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+duoji____xm\main.o: ../Core/Inc/FreeRTOSConfig.h
+duoji____xm\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+duoji____xm\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+duoji____xm\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+duoji____xm\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3/portmacro.h
+duoji____xm\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
 duoji____xm\main.o: ../Core/Inc/adc.h
 duoji____xm\main.o: ../Core/Inc/dma.h
 duoji____xm\main.o: ../Core/Inc/i2c.h
@@ -45,8 +54,8 @@ duoji____xm\main.o: ../Core/wc/oledfont.h
 duoji____xm\main.o: ../Core/wc/wifi.h
 duoji____xm\main.o: ../Core/wc/bool.h
 duoji____xm\main.o: D:\stm32\STM32_byq\ARM\ARMCC\Bin\..\include\stdio.h
-duoji____xm\main.o: ../Core/wc/tjc_usart_hmi.h
 duoji____xm\main.o: D:\stm32\STM32_byq\ARM\ARMCC\Bin\..\include\string.h
+duoji____xm\main.o: ../Core/wc/tjc_usart_hmi.h
 duoji____xm\main.o: ../Core/wc/dht11.h
 duoji____xm\main.o: ../Core/wc/adc_2.h
 duoji____xm\main.o: ../Core/wc/sgp30.h
